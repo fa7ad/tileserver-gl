@@ -1,4 +1,4 @@
-FROM node:10-stretch
+FROM node:10-stretch-slim
 
 ENV NODE_ENV="production"
 ENV CHOKIDAR_USEPOLLING=1
