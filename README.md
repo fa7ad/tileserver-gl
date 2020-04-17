@@ -7,33 +7,13 @@
 
 Vector and raster maps with GL styles. Server side rendering by Mapbox GL Native. Map tile server for Mapbox GL JS, Android, iOS, Leaflet, OpenLayers, GIS via WMTS, etc.
 
+## Slim
+This image is a repackaging of the original tileserver-gl image using node's slim image as the base
+
 ## Get Started
+Download an `.mbtiles` file from a source like [OpenMapTiles](https://openmaptiles.com/).
 
-Make sure you have Node.js version **10** installed (running `node -v` it should output something like `v10.17.0`).
-
-Install `tileserver-gl` with server-side raster rendering of vector tiles with npm
-
-```bash
-npm install -g tileserver-gl
-```
-
-Now download vector tiles from [OpenMapTiles](https://openmaptiles.org/downloads/).
-
-```bash
-curl -o zurich_switzerland.mbtiles https://[GET-YOUR-LINK]/extracts/zurich_switzerland.mbtiles
-```
-
-Start `tileserver-gl` with the downloaded vector tiles.
-
-```bash
-tileserver-gl zurich_switzerland.mbtiles
-```
-
-Alternatively, you can use the `tileserver-gl-light` package instead, which is pure javascript (does not have any native dependencies) and can run anywhere, but does not contain rasterization on the server side made with MapBox GL Native.
-
-## Using Docker
-
-An alternative to npm to start the packed software easier is to install [Docker](https://www.docker.com/) on your computer and then run in the directory with the downloaded MBTiles the command:
+Install [Docker](https://www.docker.com/) on your computer and then run in the directory with the downloaded MBTiles the command:
 
 ```bash
 docker run --rm -it -v $(pwd):/data -p 8080:80 maptiler/tileserver-gl
@@ -41,8 +21,25 @@ docker run --rm -it -v $(pwd):/data -p 8080:80 maptiler/tileserver-gl
 
 This will download and start a ready to use container on your computer and the maps are going to be available in webbrowser on localhost:8080.
 
-On laptop you can use [Docker Kitematic](https://kitematic.com/) and search "tileserver-gl" and run it, then drop in the 'data' folder the MBTiles.
+### docker-compose
+You can use a docker-compose file instead of running the long command every time.
+
+Here's an example Compose file that you can follow:
+```yml
+version: "3"
+
+services:
+  mapserver:
+    image: fa7ad/tileserver-gl-slim:latest
+    volumes:
+      - "./mbtiles:/data"
+    ports:
+      - "8080:80"
+    expose:
+      - 80
+```
+
+In the example abobe, `./mbtiles` is the directory containing your `.mbtiles` file.
 
 ## Documentation
-
-You can read full documentation of this project at https://tileserver.readthedocs.io/.
+Functionally, this image is the exact same software as tileserver-gl. So you can follow the full documentation of tileserver-gl at https://tileserver.readthedocs.io/.
