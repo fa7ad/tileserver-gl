@@ -16,7 +16,7 @@ Download an `.mbtiles` file from a source like [OpenMapTiles](https://openmaptil
 Install [Docker](https://www.docker.com/) on your computer and then run in the directory with the downloaded MBTiles the command:
 
 ```bash
-docker run --rm -it -v $(pwd):/data -p 8080:80 maptiler/tileserver-gl
+docker run --rm -it -v $(pwd):/data -p 8080:80 fa7ad/tileserver-gl-slim
 ```
 
 This will download and start a ready to use container on your computer and the maps are going to be available in webbrowser on localhost:8080.
